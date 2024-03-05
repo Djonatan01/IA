@@ -1,4 +1,4 @@
-import streamlit as st
+
 import numpy as np
 
 # Solicita ao usuário os valores de n e m
@@ -12,7 +12,7 @@ ya = 0 # Exemplo de valor para y
 atual = [xa, ya]
 
 matriz = [
-    [0, 0, 1, 1, 1, 1, 0, 0, 1, 0],
+    [1, 0, 1, 1, 1, 1, 0, 0, 1, 0],
     [1, 1, 0, 1, 0, 1, 1, 1, 1, 0],
     [1, 1, 1, 1, 0, 1, 0, 1, 1, 0],
     [0, 0, 1, 0, 1, 1, 1, 0, 1, 0],
@@ -22,6 +22,7 @@ matriz = [
     [0, 1, 0, 1, 1, 0, 0, 0, 0, 1],
     [0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
     [0, 1, 1, 0, 0, 0, 0, 1, 1, 1]
+
 ]
 
 while True:
@@ -30,6 +31,12 @@ while True:
             print(f"x: {xa}, y: {ya}, value: {value}")
             if value == 1:
                 # Exibe a matriz
-                st.table(matriz)
+                if matriz [ya][xa +1 ] == 1:
+                    matriz [ya][xa] = 5
+                elif matriz [ya+1][xa] == 1:
+                    matriz [ya][xa] = 5
+                    matriz [ya+1][xa] = 5
+                elif matriz [ya][xa - 1] == 1 & xa > 0:
+                    matriz [ya][xa - 1] = 5
             else:
-                matriz [xa][ya] = 10
+                matriz [ya][xa] = 10
