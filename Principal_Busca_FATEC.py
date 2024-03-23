@@ -2,31 +2,34 @@ import funcoes_auxiliares as fa
 import busca_sem_pesos_FATEC as bs
 from sys import exit
 
-sol = bs.busca()
-caminho = []
+def principal():
 
-# Busca em Grade de Ocupação
-mapa = fa.Gera_Problema_Grade("mapa.txt")
-dim_x = len(mapa)
-dim_y = len(mapa[0])
+    sol = bs.busca()
+    caminho = []
 
-origem  = [0,0]
-destino = [9,8]
-print(mapa)
-print(dim_x,dim_y)
+    # Busca em Grade de Ocupação
+    mapa = fa.Gera_Problema_Grade("mapa.txt")
+    dim_x = len(mapa)
+    dim_y = len(mapa[0])
 
-if origem[0]<0  or origem[0]>dim_x-1  or origem[1]<0  or origem[1]>dim_y-1  or destino[0]<0 or destino[0]>dim_x-1 or origem[1]<0  or origem[1]>dim_y-1:
-       print("Coordenada Inválida")
-       exit()
+    origem  = [0,0]
+    destino = [9,8]
+    print(mapa)
+    print(dim_x,dim_y)
 
-caminho = sol.amplitude(origem,destino,mapa,dim_x,dim_y)
-print("\n===> AMPLITUDE:",caminho)
-print("===> Custo do Caminho:",len(caminho)-1)
+    if origem[0]<0  or origem[0]>dim_x-1  or origem[1]<0  or origem[1]>dim_y-1  or destino[0]<0 or destino[0]>dim_x-1 or origem[1]<0  or origem[1]>dim_y-1:
+        print("Coordenada Inválida")
+        exit()
 
-caminho = sol.profundidade(origem,destino,mapa,dim_x,dim_y)
-print("\n*****PROFUNDIDADE*****\n",caminho)
-print("===> Custo do Caminho:",len(caminho)-1)
+    caminho = sol.amplitude(origem,destino,mapa,dim_x,dim_y)
+    print("\n===> AMPLITUDE:",caminho)
+    print("===> Custo do Caminho:",len(caminho)-1)
+    return caminho
 
+#caminho = sol.profundidade(origem,destino,mapa,dim_x,dim_y)
+#print("\n*****PROFUNDIDADE*****\n",caminho)
+#print("===> Custo do Caminho:",len(caminho)-1)
+'''
 limeteTotal = dim_x * dim_y
 limite = 1
 while limite != -1:
@@ -44,7 +47,7 @@ while limite != -1:
                 limite += 10
         else:
             limite = -1
-
+'''
 """
 caminho = sol.bidirecional(origem,destino)
 print("\n*****BIDIRECIONAL*****\n",caminho)
