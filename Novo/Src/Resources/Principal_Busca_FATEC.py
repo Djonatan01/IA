@@ -1,5 +1,5 @@
-import funcoes_auxiliares as fa
-import busca_sem_pesos_FATEC as bs
+import Util.functions as fa
+import Src.Resources.Bidirecional as bs
 from sys import exit
 
 sol = bs.busca()
@@ -44,7 +44,6 @@ while limite != -1:
                 limite += 10
         else:
             limite = -1
-
 
 caminho = sol.bidirecional(origem,destino,mapa,dim_x,dim_y)
 print("\n*****BIDIRECIONAL*****\n",caminho)

@@ -1,0 +1,124 @@
+#base {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px solid var(--border);
+    border-radius: var(--bd-rds-md);
+    background-color: var(--primary);
+    -webkit-box-shadow: 0px 5px 0px -1px var(--shadown);
+    -moz-box-shadow: 0px 5px 0px -1px var(--shadown);
+    box-shadow: 0px 5px 0px -1px var(--shadown);
+}
+
+#grid {
+    position: relative;
+
+}
+
+#grid>*:nth-child(odd) {
+    background-color: #4744d8;
+}
+
+#grid>*:nth-child(even) {
+    background-color: #201b5f;
+}
+
+#content {
+    position: absolute;
+}
+
+#content img {
+    position: absolute;
+    z-index: 1;
+    transition-duration: 1s;
+}
+
+.block {
+    float: left;
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* .block-active {
+    background: #ce0000 !important;
+} */
+
+.block span {
+    color: white;
+    opacity: 0.1;
+}
+
+.texture-floor {
+    background-image: url("../img/BG/bg-1.png");
+}
+
+.texture-b-all {
+    background-image: url("../img/BG/b-all.png");
+}
+
+.texture-b-null {
+    background-image: url("../img/BG/n-b.png");
+}
+
+.texture-b-left {
+    background-image: url("../img/BG/b-left.png");
+}
+
+.texture-b-right {
+    background-image: url("../img/BG/b-right.png");
+}
+
+.texture-b-bottom {
+    background-image: url("../img/BG/b-bottom.png");
+}
+
+.texture-b-top {
+    background-image: url("../img/BG/b-top.png");
+}
+
+.texture-b-bottom-right {
+    background-image: url("../img/BG/b-bottom-right.png");
+}
+
+.texture-b-bottom-left {
+    background-image: url("../img/BG/b-bottom-left.png");
+}
+
+.texture-b-top-left {
+    background-image: url("../img/BG/b-top-left.png");
+}
+
+.texture-b-top-right {
+    background-image: url("../img/BG/b-top-right.png");
+}
+
+.texture-b-block-left {
+    background-image: url("../img/BG/b-block-left.png");
+}
+
+.texture-b-block-right {
+    background-image: url("../img/BG/b-block-right.png");
+}
+
+.texture-b-inline-bottom {
+    background-image: url("../img/BG/b-inline-bottom.png");
+}
+
+.texture-b-inline-top {
+    background-image: url("../img/BG/b-inline-top.png");
+}
+
+.texture-b-inline {
+    background-image: url("../img/BG/b-inline.png");
+}
+
+.texture-b-block {
+    background-image: url("../img/BG/b-block.png");
+}

@@ -1,0 +1,87 @@
+:root {
+    /* COLORS SYSTEM */
+    --primary: #5896f2;
+    --border: #79ebff;
+    --shadown: #0e50b2;
+    --background: #0e142e;
+    --secondary: #eff258;
+    --shadowSecondary: #918200;
+    --disable: #4b5b6b;
+    /* GLASS COLORS */
+    --primaryGlass: #5896f2cc;
+
+    /* TYPOGRAPHY */
+    --text-d: #212529;
+    --text-l: #f8f9fc;
+    --text-primary: var(--primary);
+    --text-disabled: #ceebff;
+
+    /* FONT */
+    --fnt-sz-sm: 0.75rem;
+    --fnt-sz-md: 1rem;
+    --fnt-sz-lg: 1.7rem;
+
+    --fnt-wg-sm: 400;
+    --fnt-wg-md: 500;
+    --fnt-wg-lg: 600;
+
+    /* ICONS */
+    --icon: var(--primary);
+
+    /* BUTTONS */
+    --btn: var(--primary);
+    --btn-hover: var(--secondary);
+
+    /* PADDING */
+    --padding-sm: 0.3rem;
+    --padding-md: 0.5rem;
+    --padding-lg: 1rem;
+
+    /* MARGIN */
+    --margin-sm: 0.5rem;
+    --margin-md: 1rem;
+    --margin-lg: 1.5rem;
+
+    /* GAP */
+    --gap-sm: 0.5rem;
+    --gap-md: 0.75rem;
+    --gap-lg: 1rem;
+
+    /* BORDER-RADIUS */
+    --bd-rds-sm: 0.4rem;
+    --bd-rds-md: 1rem;
+    --bd-rds-lg: 2rem;
+
+    /* SHADOW */
+    --shd: 0 0.5rem 1rem var(--shadown);
+
+    /* TRANSITION */
+    --trns: 0.5s ease-in-out;
+
+    /* Z-INDEX */
+    --zindex: 1;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: quicksand, sans-serif;
+    scroll-behavior: smooth;
+
+}
+::-webkit-scrollbar {
+    width: 0.5rem;
+background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--shadown);
+    border-radius: var(--bd-rds-lg);
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
