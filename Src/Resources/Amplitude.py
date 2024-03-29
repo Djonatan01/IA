@@ -3,10 +3,11 @@ from Src.Util.functions import sucessores
 
 class Amplitude(object):
 
-    def __init__(self, inicio, fim, mapa):
+    def __init__(self, inicio, fim, mapa, portalMap):
         self.inicio = inicio
         self.fim = fim
         self.mapa = mapa
+        self.portalMap = portalMap
 
     # BUSCA EM AMPLITUDE
     def make(self):
@@ -33,7 +34,7 @@ class Amplitude(object):
             # remove o primeiro da fila
             atual = l1.deletaPrimeiro()
 
-            filhos = sucessores(atual.estado,self.mapa)
+            filhos = sucessores(atual.estado,self.mapa,self.portalMap )
 
             # varre todos as conexões dentro de filhos
             for novo in filhos:

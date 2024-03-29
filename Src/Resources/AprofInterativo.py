@@ -3,10 +3,11 @@ from Src.Util.functions import sucessores
 
 
 class AprofInterativo(object):
-    def __init__(self, inicio, fim, mapa):
+    def __init__(self, inicio, fim, mapa, portalMap):
         self.inicio = inicio
         self.fim = fim
         self.mapa = mapa
+        self.portalMap = portalMap
 
     # BUSCA EM APROFUNDAMENTO ITERATIVO
     def make(self):
@@ -38,7 +39,8 @@ class AprofInterativo(object):
 
                 if atual.nivel < limite:
 
-                    filhos = sucessores(atual.estado, self.mapa)
+                    filhos = sucessores(
+                        atual.estado, self.mapa, self.portalMap)
 
                     # for novo in filhos:
                     for novo in filhos:

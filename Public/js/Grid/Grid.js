@@ -7,6 +7,7 @@ class Grid {
     #interactionDocumentElement;
 
     #ambient = [];
+    #portal = [];
     #weight = [];
     #grid = {};
 
@@ -22,8 +23,7 @@ class Grid {
         element: null
     }
 
-    clickMod = 1;
-    groundMod = 1;
+    clickMod = 0;
 
     #settings = {
         scale: 1,
@@ -34,9 +34,9 @@ class Grid {
     #audio = new Audio('../Public/audio/pacman.mp3');
     #audio2 = new Audio('../Public/audio/finished.mp3');
 
-
-    constructor(ambient = [], settings = {}, screen) {
+    constructor(ambient = [], settings = {}, portal = [], screen) {
         this.#ambient = ambient;
+        this.#portal = portal;
 
         // this.#weight = weight;
 
@@ -167,16 +167,30 @@ class Grid {
                     "texture-b-inline-bottom",
                     "texture-b-block-right",
                     "texture-b-block-left",
+                    "texture-portal-top",
+                    "texture-portal-bottom",
+                    "texture-portal-right",
+                    "texture-portal-left",
                 ].forEach(className => this.#grid[y][x].classList.remove(className));
 
-                if (this.coordIsActive(x, y))
-                    this.#grid[y][x].classList.add("texture-floor");
-                else {
-                    let top = this.coordIsActive(x, y + 1);
-                    let bottom = this.coordIsActive(x, y - 1);
-                    let left = this.coordIsActive(x - 1, y);
-                    let right = this.coordIsActive(x + 1, y);
+                let top = this.coordIsActive(x, y + 1);
+                let bottom = this.coordIsActive(x, y - 1);
+                let left = this.coordIsActive(x - 1, y);
+                let right = this.coordIsActive(x + 1, y);
 
+                if (this.coordIsActive(x, y))
+                    if (this.coordIsPortal(x, y))
+                        if (top && !bottom && !left && !right)
+                            this.#grid[y][x].classList.add("texture-portal-top");
+                        else if (!top && bottom && !left && !right)
+                            this.#grid[y][x].classList.add("texture-portal-bottom");
+                        else if (!top && !bottom && left && !right)
+                            this.#grid[y][x].classList.add("texture-portal-right");
+                        else
+                            this.#grid[y][x].classList.add("texture-portal-left");
+                    else
+                        this.#grid[y][x].classList.add("texture-floor");
+                else {
                     if (top && !bottom && !left && !right)
                         this.#grid[y][x].classList.add("texture-b-bottom");
                     else if (!top && bottom && !left && !right)
@@ -219,6 +233,12 @@ class Grid {
         ) != -1;
     }
 
+    coordIsPortal(x, y) {
+        return this.#portal.findIndex(
+            (coord) => coord[0] == x && coord[1] == y
+        ) != -1;
+    }
+
     set pacman(local) {
         let gridBlock = this.#grid[local[1]][local[0]];
 
@@ -251,19 +271,29 @@ class Grid {
     get flag() { return { active: !this.#flag.hidden, coord: this.#flag.local.map(number => number - 1).join(",") }; }
 
     click(e, element, X, Y) {
-        const index = this.#ambient.findIndex(
-            (coord) => coord[0] == X && coord[1] == Y
-        );
+        console.log(this.#portal);
+        console.log([X, Y]);
 
-        if (this.clickMod === 1) {
+        if (this.clickMod === 0 || this.clickMod === 1) {
             var weight = -1;
 
             if (!element.classList.contains("block-active")) {
                 this.#ambient.push([X, Y]);
 
                 element.classList.add("block-active");
+
+                if (this.clickMod === 1)
+                    this.#portal.push([X, Y]);
+
             } else {
-                this.#ambient.splice(index, 1);
+                this.#ambient.splice(this.#ambient.findIndex(
+                    (coord) => coord[0] == X && coord[1] == Y
+                ), 1);
+
+                if (this.coordIsPortal(X, Y))
+                    this.#portal.splice(this.#portal.findIndex(
+                        (coord) => coord[0] == X && coord[1] == Y
+                    ), 1);
 
                 element.classList.remove("block-active");
             }
@@ -294,7 +324,9 @@ class Grid {
         return map;
     }
 
-
+    get portalMap() {
+        return this.#portal.map(coord => coord.map(x => x - 1).reverse().toString()).join("-");
+    }
 
     playSound() {
         this.#audio.loop = true;
@@ -309,18 +341,23 @@ class Grid {
         this.#audio.volume = 0.05;
     }
 
-playSoundPix() {
+    playSoundPix() {
         this.#audio2.volume = 0.05;
         this.#audio2.play();
     }
-
 
     makePath(path, passCoord = null) {
         let coord = path[0];
 
         path.splice(0, 1);
 
+        if (this.coordIsPortal(...passCoord ?? [0, 0]) && this.coordIsPortal(...coord))
+            this.#pacman.element.classList.remove("pacman-slow");
+        else
+            this.#pacman.element.classList.add("pacman-slow");
+
         this.pacman = coord;
+
         if (passCoord != null) {
 
             let [pC_x, pC_y] = passCoord;
@@ -347,7 +384,7 @@ playSoundPix() {
         }
         else this.playSound()
 
-        this.#pacman.element.classList.add("pacman-slow");
+
 
         if (path.length != 0)
             setTimeout(() => {
@@ -365,10 +402,13 @@ playSoundPix() {
             this.Screen.alert("FINISHED!!", "info");
             this.stopSound()
 
-            this.#pacman.element.classList.remove("pacman-slow");
+            setTimeout(() => {
+                this.#pacman.element.classList.remove("pacman-slow");
+            }, 2000);
+
             this.#pacman.element.classList.remove("pacman-eating");
 
-this.playSoundPix();
+            this.playSoundPix();
 
         }
 

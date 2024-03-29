@@ -33,6 +33,36 @@ body {
     gap: var(--gap-sm);
 }
 
+
+.portal {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding-sm);
+    border: 2px solid var(--border);
+    border-radius: var(--bd-rds-sm);
+    background-color: var(--primary);
+    -webkit-box-shadow: 0px 5px 0px -1px var(--shadown);
+    -moz-box-shadow: 0px 5px 0px -1px var(--shadown);
+    box-shadow: 0px 5px 0px -1px var(--shadown);
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+}
+
+.portal:hover {
+    background-color: var(--secondary);
+}
+
+.portal:hover .icon {
+    color: var(--primary);
+}
+
+.portal:active {
+    box-shadow: none;
+    transform: translateY(5px);
+}
+
 .config {
     all: unset;
     display: flex;

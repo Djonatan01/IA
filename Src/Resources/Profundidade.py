@@ -2,10 +2,11 @@ from Src.Models.ListaDEnc import lista
 from Src.Util.functions import sucessores
 
 class Profundidade(object):
-    def __init__(self, inicio, fim, mapa):
+    def __init__(self, inicio, fim, mapa, portalMap):
         self.inicio = inicio
         self.fim = fim
         self.mapa = mapa
+        self.portalMap = portalMap
 
 # BUSCA EM PROFUNDIDADE
     def make(self):
@@ -32,7 +33,7 @@ class Profundidade(object):
             atual = l1.deletaUltimo()
 
             # Manipulação de Grade de Ocupação
-            filhos = sucessores(atual.estado,self.mapa)
+            filhos = sucessores(atual.estado, self.mapa, self.portalMap)
 
             # varre todos as conexões dentro de filhos
             for novo in filhos:

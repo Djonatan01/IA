@@ -122,3 +122,19 @@
 .texture-b-block {
     background-image: url("../img/BG/b-block.png");
 }
+
+.texture-portal-left {
+    background-image: url("../img/portal-left.png");
+}
+
+.texture-portal-right {
+    background-image: url("../img/portal-right.png");
+}
+
+.texture-portal-bottom {
+    background-image: url("../img/portal-bottom.png");
+}
+
+.texture-portal-top {
+    background-image: url("../img/portal-top.png");
+}

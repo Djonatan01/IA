@@ -2,11 +2,12 @@ from Src.Models.ListaDEnc import lista
 from Src.Util.functions import sucessores
 
 class ProfLimitada(object):
-    def __init__(self, inicio, fim, mapa,limite):
+    def __init__(self, inicio, fim, mapa, limite, portalMap):
         self.inicio = inicio
         self.fim = fim
         self.mapa = mapa
         self.limite = limite
+        self.portalMap = portalMap
 
     # BUSCA EM PROFUNDIDADE LIMITADA
     def make(self):
@@ -35,7 +36,7 @@ class ProfLimitada(object):
             if atual.nivel< self.limite:
                 #ind = nos.index(atual.estado)
 
-                filhos = sucessores(atual.estado,self.mapa)
+                filhos = sucessores(atual.estado, self.mapa, self.portalMap)
 
                 # varre todos as conexões dentro do grafo a partir de atual
                 for novo in filhos:

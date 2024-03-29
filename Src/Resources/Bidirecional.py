@@ -3,10 +3,11 @@ from Src.Util.functions import sucessores
 
 
 class Bidirecional(object):
-    def __init__(self, inicio, fim, mapa):
+    def __init__(self, inicio, fim, mapa, portalMap):
         self.inicio = inicio
         self.fim = fim
         self.mapa = mapa
+        self.portalMap = portalMap
 
     # BUSCA BIDIRECIONAL
     def make(self):
@@ -54,7 +55,7 @@ class Bidirecional(object):
                 # remove o primeiro da fila
                 atual = l1.deletaPrimeiro()
 
-                filhos = sucessores(atual.estado,self.mapa)
+                filhos = sucessores(atual.estado, self.mapa, self.portalMap)
                 # varre todos as conexões dentro do grafo a partir de atual
                 for novo in filhos:
                     # pressuponho que não foi visitado
@@ -105,7 +106,7 @@ class Bidirecional(object):
                 # remove o primeiro da fila
                 atual = l3.deletaPrimeiro()
 
-                filhos = sucessores(atual.estado,self.mapa)
+                filhos = sucessores(atual.estado, self.mapa, self.portalMap)
 
                 for novo in filhos:
                     # pressuponho que não foi visitado
