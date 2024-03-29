@@ -9,7 +9,7 @@ class ProfLimitada(object):
         self.limite = limite
 
     # BUSCA EM PROFUNDIDADE LIMITADA
-    def prof_limitada(self):
+    def make(self):
 
         # manipular a FILA para a busca
         l1 = lista()
@@ -67,10 +67,6 @@ class ProfLimitada(object):
                         if novo == self.fim:
                             caminho = []
                             caminho += l2.exibeCaminho()
-                            #print("\nPilha:\n",l1.exibeLista())
-                            #print("\nÁrvore de busca:\n",l2.exibeLista())
                             return caminho
 
-        caminho = []
-        caminho.append("caminho não encontrado")
-        return caminho
+        return "error"

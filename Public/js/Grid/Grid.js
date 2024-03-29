@@ -31,6 +31,9 @@ class Grid {
         debuggerOn: false,
     };
 
+    #audio = new Audio('../Public/audio/pacman.mp3');
+    #audio2 = new Audio('../Public/audio/finished.mp3');
+
 
     constructor(ambient = [], settings = {}, screen) {
         this.#ambient = ambient;
@@ -40,72 +43,6 @@ class Grid {
         Object.assign(this.#settings, settings);
 
         this.Screen = screen;
-    }
-
-    set pacman(local) {
-        let gridBlock = this.#grid[local[1]][local[0]];
-
-        let { top, left } = gridBlock.style;
-
-        this.#pacman.hidden = false;
-        this.#pacman.element.classList.remove("hide");
-        this.#pacman.element.style.top = top;
-        this.#pacman.element.style.left = left;
-
-        this.#pacman.local = local;
-    }
-    set flag(local) {
-        let gridBlock = this.#grid[local[1]][local[0]];
-
-        let { top, left } = gridBlock.style;
-
-        this.#flag.hidden = false;
-        this.#flag.element.classList.remove("hide");
-        this.#flag.element.style.top = top;
-        this.#flag.element.style.left = left;
-        this.#flag.element.style.marginTop = "3px";
-        this.#flag.element.style.marginLeft = "1px";
-
-        this.#flag.local = local;
-    }
-
-    get pacman() { return { active: !this.#pacman.hidden, coord: this.#pacman.local.join(",") }; }
-    get flag() { return { active: !this.#flag.hidden, coord: this.#flag.local.join(",") }; }
-
-    click(e, element, X, Y) {
-        const index = this.#ambient.findIndex(
-            (coord) => coord[0] == X && coord[1] == Y
-        );
-
-        if (this.clickMod === 1) {
-            var weight = -1;
-
-            if (!element.classList.contains("block-active")) {
-                this.#ambient.push([X, Y]);
-
-                element.classList.add("block-active");
-            } else {
-                this.#ambient.splice(index, 1);
-
-                element.classList.remove("block-active");
-            }
-        } else if (this.clickMod === 2) {
-            if (this.coordIsActive(X, Y)) {
-                this.pacman = [X, Y];
-            }
-            else this.Screen.alert("Voce não pode adicionar ele em uma parede", "danger");
-        } else if (this.clickMod === 3) {
-            if (this.coordIsActive(X, Y)) {
-                this.flag = [X, Y];
-            }
-            else this.Screen.alert("Voce não pode adicionar uma bandeira em uma parede", "danger");
-        }
-
-        console.log(this.#ambient);
-        console.log([X, Y]);
-        console.log(this.#weight);
-        console.log(weight);
-        this.texture();
     }
 
     createGrid() {
@@ -126,7 +63,6 @@ class Grid {
         base.appendChild(grid);
 
         const ambient = this.#ambient;
-        // const weight = this.#weight;
 
         let { scale, cartesiano_size } = this.#settings;
 
@@ -207,12 +143,6 @@ class Grid {
         this.texture();
     }
 
-    coordIsActive(x, y) {
-        return this.#ambient.findIndex(
-            (coord) => coord[0] == x && coord[1] == y
-        ) != -1;
-    }
-
     texture() {
         let { cartesiano_size } = this.#settings;
 
@@ -220,7 +150,6 @@ class Grid {
 
         for (let y = 1; y <= cartesiano_size; y++)
             for (let x = 1; x <= cartesiano_size; x++) {
-
                 [
                     "texture-b-bottom",
                     "texture-b-top",
@@ -284,6 +213,71 @@ class Grid {
             }
     }
 
+    coordIsActive(x, y) {
+        return this.#ambient.findIndex(
+            (coord) => coord[0] == x && coord[1] == y
+        ) != -1;
+    }
+
+    set pacman(local) {
+        let gridBlock = this.#grid[local[1]][local[0]];
+
+        let { top, left } = gridBlock.style;
+
+        this.#pacman.hidden = false;
+        this.#pacman.element.classList.remove("hide");
+        this.#pacman.element.style.top = top;
+        this.#pacman.element.style.left = left;
+
+        this.#pacman.local = local;
+    }
+    get pacman() { return { active: !this.#pacman.hidden, coord: this.#pacman.local.map(number => number - 1).join(",") }; }
+
+    set flag(local) {
+        let gridBlock = this.#grid[local[1]][local[0]];
+
+        let { top, left } = gridBlock.style;
+
+        this.#flag.hidden = false;
+        this.#flag.element.classList.remove("hide");
+        this.#flag.element.style.top = top;
+        this.#flag.element.style.left = left;
+        this.#flag.element.style.marginTop = "3px";
+        this.#flag.element.style.marginLeft = "1px";
+
+        this.#flag.local = local;
+    }
+
+    get flag() { return { active: !this.#flag.hidden, coord: this.#flag.local.map(number => number - 1).join(",") }; }
+
+    click(e, element, X, Y) {
+        const index = this.#ambient.findIndex(
+            (coord) => coord[0] == X && coord[1] == Y
+        );
+
+        if (this.clickMod === 1) {
+            var weight = -1;
+
+            if (!element.classList.contains("block-active")) {
+                this.#ambient.push([X, Y]);
+
+                element.classList.add("block-active");
+            } else {
+                this.#ambient.splice(index, 1);
+
+                element.classList.remove("block-active");
+            }
+        } else if (this.clickMod === 2) {
+            if (this.coordIsActive(X, Y)) this.pacman = [X, Y];
+            else this.Screen.alert("Você não pode adicionar ele em uma parede", "danger");
+        } else if (this.clickMod === 3) {
+            if (this.coordIsActive(X, Y)) this.flag = [X, Y];
+            else this.Screen.alert("Você não pode adicionar uma bandeira em uma parede", "danger");
+        }
+
+        this.texture();
+    }
+
     get map() {
         let { cartesiano_size } = this.#settings;
 
@@ -298,6 +292,86 @@ class Grid {
         }
 
         return map;
+    }
+
+
+
+    playSound() {
+        this.#audio.loop = true;
+        this.#audio.volume = 0.05;
+        this.#audio.play();
+    }
+
+    stopSound() {
+        this.#audio.loop = false;
+        this.#audio.pause();
+        this.#audio.currentTime = 0;
+        this.#audio.volume = 0.05;
+    }
+
+playSoundPix() {
+        this.#audio2.volume = 0.05;
+        this.#audio2.play();
+    }
+
+
+    makePath(path, passCoord = null) {
+        let coord = path[0];
+
+        path.splice(0, 1);
+
+        this.pacman = coord;
+        if (passCoord != null) {
+
+            let [pC_x, pC_y] = passCoord;
+            let [c_x, c_y] = coord;
+            let direction;
+
+            if (pC_x == c_x && pC_y > c_y)
+                direction = "to-up";
+            else if (pC_x > c_x && pC_y == c_y)
+                direction = "to-left";
+            else if (pC_x < c_x && pC_y == c_y)
+                direction = "to-rigth";
+            else
+                direction = "to-down";
+
+            [
+                "to-left",
+                "to-rigth",
+                "to-up",
+                "to-down",
+            ].forEach(className => this.#pacman.element.classList.remove(className));
+            this.#pacman.element.classList.add(direction);
+            this.#pacman.element.classList.add("pacman-eating");
+        }
+        else this.playSound()
+
+        this.#pacman.element.classList.add("pacman-slow");
+
+        if (path.length != 0)
+            setTimeout(() => {
+                this.makePath(path, coord);
+            }, 950);
+        else {
+
+            this.#flag.element.classList.add("hide");
+            this.#flag = {
+                ...this.#flag,
+                hidden: true,
+                local: null
+            }
+
+            this.Screen.alert("FINISHED!!", "info");
+            this.stopSound()
+
+            this.#pacman.element.classList.remove("pacman-slow");
+            this.#pacman.element.classList.remove("pacman-eating");
+
+this.playSoundPix();
+
+        }
+
     }
 
 }

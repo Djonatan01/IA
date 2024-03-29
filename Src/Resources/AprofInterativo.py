@@ -1,16 +1,20 @@
 from Src.Models.ListaDEnc import lista
 from Src.Util.functions import sucessores
 
-class ProfInterativo(object):
-    def __init__(self, inicio, fim, mapa,lim_max):
+
+class AprofInterativo(object):
+    def __init__(self, inicio, fim, mapa):
         self.inicio = inicio
         self.fim = fim
         self.mapa = mapa
-        self.lim_max = lim_max
 
     # BUSCA EM APROFUNDAMENTO ITERATIVO
-    def aprof_iterativo(self):
-        for limite in range(1,self.lim_max):
+    def make(self):
+        R=3
+
+        for limite in range(1, (len(self.mapa) * 2) + R, R):
+            print(limite)
+
             # manipular a FILA para a busca
             l1 = lista()
 
@@ -18,8 +22,8 @@ class ProfInterativo(object):
             l2 = lista()
 
             # insere ponto inicial como nó raiz da árvore
-            l1.insereUltimo(self.inicio,0,None)
-            l2.insereUltimo(self.inicio,0,None)
+            l1.insereUltimo(self.inicio, 0, None)
+            l2.insereUltimo(self.inicio, 0, None)
 
             # controle de nós visitados
             visitado = []
@@ -32,9 +36,9 @@ class ProfInterativo(object):
                 # remove o primeiro da fila
                 atual = l1.deletaUltimo()
 
-                if atual.nivel<limite:
+                if atual.nivel < limite:
 
-                    filhos = sucessores(atual.estado,self.mapa)
+                    filhos = sucessores(atual.estado, self.mapa)
 
                     # for novo in filhos:
                     for novo in filhos:
@@ -43,11 +47,11 @@ class ProfInterativo(object):
 
                         # controle de nós repetidos
                         for j in range(len(visitado)):
-                            if visitado[j][0]==novo:
-                                if visitado[j][1]<=(atual.nivel+1):
+                            if visitado[j][0] == novo:
+                                if visitado[j][1] <= (atual.nivel+1):
                                     flag = False
                                 else:
-                                    visitado[j][1]=atual.nivel+1
+                                    visitado[j][1] = atual.nivel+1
                                 break
 
                         # se não foi visitado inclui na fila
@@ -65,10 +69,8 @@ class ProfInterativo(object):
                             if novo == self.fim:
                                 caminho = []
                                 caminho += l2.exibeCaminho()
-                                #print("\nPilha:\n",l1.exibeLista())
-                                #print("\nÁrvore de busca:\n",l2.exibeLista())
-                                return caminho, limite
+                                # print("\nPilha:\n",l1.exibeLista())
+                                # print("\nÁrvore de busca:\n",l2.exibeLista())
+                                return [caminho, limite]
 
-        caminho = []
-        caminho.append("caminho não encontrado")
-        return caminho, limite
+        return "error"

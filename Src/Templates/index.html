@@ -11,8 +11,35 @@
     <body>
         <div id="base"></div>
         <div class="method_selected">
-            <span>Tipo de Método:</span>
-            <span id="typeMethod"></span>
+            <div class="results">
+                <span id="typeMethod"></span>
+            </div>
+            <div class="results">
+                <i class="ph-fill ph-ghost"></i>
+                <span id="startOrigin"></span>
+            </div>
+            <div class="results">
+                <i class="ph ph-target"></i>
+                <span id="endOrigin"></span>
+            </div>
+            <div class="results">
+                <i class="ph ph-coins"></i>
+                <span id="cost"></span>
+            </div>
+            <div class="results">
+                <i class="ph ph-prohibit"></i>
+                <span id="limit"></span>
+            </div>
+            <div class="results sectionPath">
+                <div class="txt">
+                    <i class="ph-fill ph-path"></i>
+                    <span id="pathMethod"></span>
+                </div>
+                <span id="path">
+                    <ul>
+                    </ul>
+                </span>
+            </div>
         </div>
         <div class="action">
             <div class="options" id="option">
@@ -22,9 +49,13 @@
                 <button class="method_option" id="Prof">
                     <span>Profundidade</span>
                 </button>
-                <button class="method_option" id="ProfLim">
-                    <span>Profundidade Limitada</span>
-                </button>
+                <div class="profLimit">
+                    <button class="method_option" id="ProfLim">
+                        <span>Profundidade Limitada</span>
+                    </button>
+                    <input type="number" name="profundLimite" id="ipt_profLim"
+                        min="0">
+                </div>
                 <button class="method_option" id="AprofIter">
                     <span>Aprofundamento Iterativo</span>
                 </button>

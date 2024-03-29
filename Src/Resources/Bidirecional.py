@@ -3,13 +3,13 @@ from Src.Util.functions import sucessores
 
 
 class Bidirecional(object):
-    def __init__(self, inicio, fim, mapa,lim_max):
+    def __init__(self, inicio, fim, mapa):
         self.inicio = inicio
         self.fim = fim
         self.mapa = mapa
 
     # BUSCA BIDIRECIONAL
-    def bidirecional(self):
+    def make(self):
         # Primeiro Amplitude"
         # Manipular a FILA para a busca
         l1 = lista()
@@ -149,4 +149,4 @@ class Bidirecional(object):
 
             ni += 1
 
-        return "caminho não encontrado"
+        return "error"

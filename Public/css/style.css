@@ -1,13 +1,14 @@
 @import url("./global.css");
 
 body {
-    background-color: var(--primary);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     height: 100vh;
     width: 100vw;
+    background-color: var(--primary);
+    overflow-x: hidden;
 }
 
 .hide {
@@ -113,6 +114,34 @@ body {
 
 .method_option:hover span {
     color: var(--primary);
+}
+
+#ProfLim {
+    width: 70%;
+}
+
+.profLimit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap-sm);
+}
+
+#ipt_profLim {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 30%;
+    padding: var(--padding-sm);
+    border: 2px dashed var(--border);
+    border-radius: var(--bd-rds-sm);
+    color: var(--text-l);
+    -webkit-box-shadow: 0px 5px 0px -1px var(--shadown);
+    -moz-box-shadow: 0px 5px 0px -1px var(--shadown);
+    box-shadow: 0px 5px 0px -1px var(--shadown);
+    transition: all .2s ease-in-out;
 }
 
 .btns {
@@ -404,6 +433,10 @@ body {
     border-right-color: transparent;
 }
 
+.pacman-slow {
+    transition-duration: 1s;
+}
+
 .pacman:before {
     content: "";
     position: absolute;
@@ -595,13 +628,13 @@ body {
 }
 
 #alert {
-    position: fixed;
-    width: 100%;
+    position: absolute;
     height: auto;
     display: flex;
     align-items: center;
-    left: 0px;
+    left: 50%;
     top: 0px;
+    transform: translateX(-50%);
     flex-direction: column;
     justify-content: center;
     padding-top: 2dvh;
@@ -652,14 +685,16 @@ body {
 
 .method_selected {
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
     position: absolute;
+    max-height: calc(100% - 8dvh);
+    padding-inline: 14px;
+    overflow: auto;
     top: 4dvh;
     left: 2dvw;
-    min-height: 36px;
-    gap: var(--gap-sm);
+    min-height: 100px;
+    gap: var(--gap-md);
     color: var(--text-l);
     font-size: var(--fnt-sz-md);
     font-weight: var(--fnt-wg-lg);
@@ -670,4 +705,61 @@ body {
     -webkit-box-shadow: 0px 5px 0px -1px var(--shadown);
     -moz-box-shadow: 0px 5px 0px -1px var(--shadown);
     box-shadow: 0px 5px 0px -1px var(--shadown);
+}
+
+.results {
+    display: flex;
+    justify-content: flex-start;
+    gap: var(--gap-md);
+    width: 100%;
+    color: var(--secondary);
+}
+
+.sectionPath {
+    display: flex;
+    flex-direction: column;
+    gap: 0px !important;
+}
+
+#typeMethod::before {
+    content: "Método: ";
+    color: var(--text-l);
+}
+
+#startOrigin::before {
+    content: "Inicio: ";
+    color: var(--text-l);
+}
+
+#endOrigin::before {
+    content: "Destino: ";
+    color: var(--text-l);
+}
+
+#cost::before {
+    content: "Custo: ";
+    color: var(--text-l);
+}
+
+#limit::before {
+    content: "Limite: ";
+    color: var(--text-l);
+}
+
+#pathMethod::before {
+    content: "Caminho do Método: ";
+    color: var(--text-l);
+}
+
+#path::before {
+    content: "[";
+}
+
+#path::after {
+    content: "]";
+}
+
+li {
+    list-style-type: none;
+    padding-inline: var(--padding-lg);
 }

@@ -8,7 +8,7 @@ class Profundidade(object):
         self.mapa = mapa
 
 # BUSCA EM PROFUNDIDADE
-    def profundidade(self):
+    def make(self):
 
         # manipular a FILA para a busca
         l1 = lista()
@@ -34,7 +34,6 @@ class Profundidade(object):
             # Manipulação de Grade de Ocupação
             filhos = sucessores(atual.estado,self.mapa)
 
-            # varre todos as conexões dentro do grafo a partir de atual
             # varre todos as conexões dentro de filhos
             for novo in filhos:
 
@@ -65,10 +64,7 @@ class Profundidade(object):
                     if novo == self.fim:
                         caminho = []
                         caminho += l2.exibeCaminho()
-                        #print("\nFila:\n",l1.exibeLista())
-                        #print("\nÁrvore de busca:\n",l2.exibeLista())
+
                         return caminho
 
-        caminho = []
-        caminho.append("caminho não encontrado")
-        return caminho
+        return "error"

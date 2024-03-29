@@ -26,6 +26,7 @@ class Amplitude(object):
         linha = []
         linha.append(self.inicio)
         linha.append(0)
+
         visitado.append(linha)
 
         while l1.vazio() == False:
@@ -36,7 +37,6 @@ class Amplitude(object):
 
             # varre todos as conexões dentro de filhos
             for novo in filhos:
-
                 flag = True
 
                 for j in range(len(visitado)):
@@ -62,7 +62,6 @@ class Amplitude(object):
                     if novo == self.fim:
                         caminho = []
                         caminho += l2.exibeCaminho()
-
                         return caminho
 
         return "error"
