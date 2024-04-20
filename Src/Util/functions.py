@@ -5,8 +5,6 @@ def verificar_presenca(array, ponto):
     return False
 
 # Rotina sucessores para Grade de Ocupação
-
-
 def sucessores(atual, mapa, portal_map):
     f = []
 

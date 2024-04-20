@@ -55,86 +55,32 @@
     opacity: 0.1;
 }
 
-.texture-floor {
-    background-image: url("../img/BG/bg-1.png");
-}
+.texture-floor { background-image: url("../img/BG/bg-1.png"); }
+.texture-b-all { background-image: url("../img/BG/b-all.png"); }
+.texture-b-null { background-image: url("../img/BG/n-b.png"); }
+.texture-b-left { background-image: url("../img/BG/b-left.png"); }
+.texture-b-right { background-image: url("../img/BG/b-right.png"); }
+.texture-b-bottom { background-image: url("../img/BG/b-bottom.png"); }
+.texture-b-top { background-image: url("../img/BG/b-top.png"); }
+.texture-b-bottom-right { background-image: url("../img/BG/b-bottom-right.png"); }
+.texture-b-bottom-left { background-image: url("../img/BG/b-bottom-left.png"); }
+.texture-b-top-left { background-image: url("../img/BG/b-top-left.png"); }
+.texture-b-top-right { background-image: url("../img/BG/b-top-right.png"); }
+.texture-b-block-left { background-image: url("../img/BG/b-block-left.png"); }
+.texture-b-block-right { background-image: url("../img/BG/b-block-right.png"); }
+.texture-b-inline-bottom { background-image: url("../img/BG/b-inline-bottom.png"); }
+.texture-b-inline-top { background-image: url("../img/BG/b-inline-top.png"); }
+.texture-b-inline { background-image: url("../img/BG/b-inline.png"); }
+.texture-b-block { background-image: url("../img/BG/b-block.png"); }
+.texture-portal-left { background-image: url("../img/portal-left.png"); }
+.texture-portal-right { background-image: url("../img/portal-right.png"); }
+.texture-portal-bottom { background-image: url("../img/portal-bottom.png"); }
+.texture-portal-top { background-image: url("../img/portal-top.png"); }
+.texture-weight-0{ background-image: url("../img/bg-1_1.png"); }
+.texture-weight-1{ background-image: url("../img/bg-1_2.png"); }
+.texture-weight-2{ background-image: url("../img/bg-1_3.png"); }
 
-.texture-b-all {
-    background-image: url("../img/BG/b-all.png");
-}
-
-.texture-b-null {
-    background-image: url("../img/BG/n-b.png");
-}
-
-.texture-b-left {
-    background-image: url("../img/BG/b-left.png");
-}
-
-.texture-b-right {
-    background-image: url("../img/BG/b-right.png");
-}
-
-.texture-b-bottom {
-    background-image: url("../img/BG/b-bottom.png");
-}
-
-.texture-b-top {
-    background-image: url("../img/BG/b-top.png");
-}
-
-.texture-b-bottom-right {
-    background-image: url("../img/BG/b-bottom-right.png");
-}
-
-.texture-b-bottom-left {
-    background-image: url("../img/BG/b-bottom-left.png");
-}
-
-.texture-b-top-left {
-    background-image: url("../img/BG/b-top-left.png");
-}
-
-.texture-b-top-right {
-    background-image: url("../img/BG/b-top-right.png");
-}
-
-.texture-b-block-left {
-    background-image: url("../img/BG/b-block-left.png");
-}
-
-.texture-b-block-right {
-    background-image: url("../img/BG/b-block-right.png");
-}
-
-.texture-b-inline-bottom {
-    background-image: url("../img/BG/b-inline-bottom.png");
-}
-
-.texture-b-inline-top {
-    background-image: url("../img/BG/b-inline-top.png");
-}
-
-.texture-b-inline {
-    background-image: url("../img/BG/b-inline.png");
-}
-
-.texture-b-block {
-    background-image: url("../img/BG/b-block.png");
-}
-
-.texture-portal-left {
-    background-image: url("../img/portal-left.png");
-}
-
-.texture-portal-right {
-    background-image: url("../img/portal-right.png");
-}
-
-.texture-portal-bottom {
-    background-image: url("../img/portal-bottom.png");
-}
-
-.texture-portal-top {
-    background-image: url("../img/portal-top.png");
-}
+.texture-weight-rotate-0{ transform: rotate(  0deg); }
+.texture-weight-rotate-1{ transform: rotate( 90deg); }
+.texture-weight-rotate-2{ transform: rotate(180deg); }
+.texture-weight-rotate-3{ transform: rotate(360deg); }

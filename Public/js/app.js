@@ -4,7 +4,7 @@ $(document).ready(function () {
     const Screen = new ScreenManager();
 
     const Labirinto = new Grid(
-        [[21, 6], [1, 6],[2, 12], [2, 11], [15, 5], [14, 5], [2, 2], [3, 2], [3, 3], [3, 4], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5], [8, 5], [8, 6], [8, 7], [8, 9], [8, 8], [8, 10], [9, 10], [10, 10], [11, 10], [12, 10], [13, 10], [14, 10], [14, 11], [14, 12], [14, 13], [14, 14], [14, 15], [14, 16], [15, 16], [16, 16], [17, 16], [18, 16], [18, 17], [18, 18], [18, 19], [19, 19], [17, 8], [17, 11], [17, 10], [17, 9], [17, 7], [17, 6], [17, 5], [17, 4], [17, 3], [16, 3], [13, 6], [15, 3], [14, 3], [13, 3], [13, 4], [13, 5], [13, 7], [13, 8], [13, 9], [12, 6], [11, 6], [10, 6], [9, 6], [7, 10], [6, 10], [5, 10], [4, 10], [4, 11], [4, 12], [4, 13], [4, 14], [4, 15], [4, 17], [4, 16], [5, 16], [6, 16], [7, 16], [8, 16], [9, 16], [10, 16], [10, 17], [10, 18], [10, 19], [10, 20], [13, 20], [12, 20], [11, 20], [15, 20], [14, 20], [15, 19], [15, 18], [16, 14], [17, 14], [18, 14], [19, 14], [20, 14], [20, 13], [20, 12], [20, 11], [20, 10], [20, 9], [20, 8], [20, 7], [20, 6], [15, 14], [20, 5], [20, 4], [20, 2], [20, 3], [13, 14], [12, 14], [11, 13], [10, 13], [9, 13], [8, 13], [11, 14], [7, 13], [6, 13], [4, 18], [4, 19], [3, 19], [2, 19], [2, 20], [2, 13], [3, 13], [3, 8], [4, 8], [5, 8], [6, 8], [13, 2], [12, 2], [11, 2], [10, 2], [10, 3], [3, 10], [3, 9], [9, 2], [8, 2], [7, 2], [20, 19], [20, 20], [12, 19], [12, 18], [12, 17], [9, 19], [8, 19], [7, 19], [6, 19], [7, 20], [16, 8], [15, 8], [15, 7], [18, 6], [9, 11], [12, 11], [12, 12], [19, 16], [20, 18], [17, 2], [10, 7], [10, 8], [8, 14], [8, 15], [7, 3], [6, 3], [5, 3], [5, 2], [2, 8], [2, 7], [2, 6], [19, 9], [18, 9], [3, 8], [4, 8], [5, 8], [6, 8]],
+        [[21, 6], [1, 6], [2, 12], [2, 11], [15, 5], [14, 5], [2, 2], [3, 2], [3, 3], [3, 4], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5], [8, 5], [8, 6], [8, 7], [8, 9], [8, 8], [8, 10], [9, 10], [10, 10], [11, 10], [12, 10], [13, 10], [14, 10], [14, 11], [14, 12], [14, 13], [14, 14], [14, 15], [14, 16], [15, 16], [16, 16], [17, 16], [18, 16], [18, 17], [18, 18], [18, 19], [19, 19], [17, 8], [17, 11], [17, 10], [17, 9], [17, 7], [17, 6], [17, 5], [17, 4], [17, 3], [16, 3], [13, 6], [15, 3], [14, 3], [13, 3], [13, 4], [13, 5], [13, 7], [13, 8], [13, 9], [12, 6], [11, 6], [10, 6], [9, 6], [7, 10], [6, 10], [5, 10], [4, 10], [4, 11], [4, 12], [4, 13], [4, 14], [4, 15], [4, 17], [4, 16], [5, 16], [6, 16], [7, 16], [8, 16], [9, 16], [10, 16], [10, 17], [10, 18], [10, 19], [10, 20], [13, 20], [12, 20], [11, 20], [15, 20], [14, 20], [15, 19], [15, 18], [16, 14], [17, 14], [18, 14], [19, 14], [20, 14], [20, 13], [20, 12], [20, 11], [20, 10], [20, 9], [20, 8], [20, 7], [20, 6], [15, 14], [20, 5], [20, 4], [20, 2], [20, 3], [13, 14], [12, 14], [11, 13], [10, 13], [9, 13], [8, 13], [11, 14], [7, 13], [6, 13], [4, 18], [4, 19], [3, 19], [2, 19], [2, 20], [2, 13], [3, 13], [3, 8], [4, 8], [5, 8], [6, 8], [13, 2], [12, 2], [11, 2], [10, 2], [10, 3], [3, 10], [3, 9], [9, 2], [8, 2], [7, 2], [20, 19], [20, 20], [12, 19], [12, 18], [12, 17], [9, 19], [8, 19], [7, 19], [6, 19], [7, 20], [16, 8], [15, 8], [15, 7], [18, 6], [9, 11], [12, 11], [12, 12], [19, 16], [20, 18], [17, 2], [10, 7], [10, 8], [8, 14], [8, 15], [7, 3], [6, 3], [5, 3], [5, 2], [2, 8], [2, 7], [2, 6], [19, 9], [18, 9], [3, 8], [4, 8], [5, 8], [6, 8]],
         { cartesiano_size: 19, scale: 0.5, },
         [[21, 6], [1, 6]],
         Screen
@@ -33,43 +33,54 @@ $(document).ready(function () {
         }, 5000);
     });
 
-    $("#pacman").click(function () {
-        $("#pacman").toggleClass("btn_active");
+    active_button = (clicked) => {
+        if(clicked != 4) { $("#config_weight").removeClass("btn_active"); $("#floor").removeClass("active"); }
+        if(clicked != 3) $("#flag").removeClass("btn_active"); 
+        if(clicked != 2) $("#pacman").removeClass("btn_active"); 
+        if(clicked != 1) $("#portal").removeClass("btn_active"); 
+    };
 
-        if ($('#pacman').hasClass('btn_active')) {
-            $("#portal").removeClass("btn_active");
-            $("#flag").removeClass("btn_active");
-            Labirinto.clickMod = 2;
-        }
-        else Labirinto.clickMod = 0;
+    $("#config_weight").click(function () {
+        active_button(4);
+
+        if (!$('#config_weight').hasClass('btn_active')) { $("#config_weight").addClass("btn_active"); $("#floor").addClass("active"); Labirinto.clickMod = 4; }
+        else { active_button(5); Labirinto.clickMod = 0; }
     });
 
     $("#flag").click(function () {
-        $("#flag").toggleClass("btn_active");
+        active_button(3);
 
-        if ($('#flag').hasClass('btn_active')) {
-            $("#portal").toggleClass("btn_active");
-            $("#pacman").removeClass("btn_active");
-            Labirinto.clickMod = 3;
-        }
-        else Labirinto.clickMod = 0;
+        if (!$('#flag').hasClass('btn_active')) { $("#flag").addClass("btn_active"); Labirinto.clickMod = 3; }
+        else { active_button(5); Labirinto.clickMod = 0; }
     });
+
+    $("#pacman").click(function () {
+        active_button(2);
+
+        if (!$('#pacman').hasClass('btn_active')) { $("#pacman").addClass("btn_active"); Labirinto.clickMod = 2; }
+        else { active_button(5); Labirinto.clickMod = 0; }
+    });
+
+
+    $("#portal").click(function () {
+        active_button(1);
+
+        if (!$('#portal').hasClass('btn_active')) { $("#portal").addClass("btn_active"); Labirinto.clickMod = 1; }
+        else { active_button(5); Labirinto.clickMod = 0; }
+    });
+
+    $(".floor_option").click(function () {
+        $(".floor_option").css('box-shadow', '0px 5px 0px -1px var(--shadown)');
+        $(this).css('box-shadow', '0px 5px 0px -1px var(--secondary)');
+    });
+
+    $("#floor1").click(() => Labirinto.selectedWeight = 0);
+    $("#floor2").click(() => Labirinto.selectedWeight = 1);
+    $("#floor3").click(() => Labirinto.selectedWeight = 2);
 
     $(".method_option").click(function () {
         methodText = $(this).find('span').text();
         $("#typeMethod").text(methodText);
-    });
-
-    $("#portal").click(function () {
-        $("#portal").toggleClass("btn_active");
-
-        if ($('#portal').hasClass('btn_active')) {
-            $("#flag").removeClass("btn_active");
-            $("#pacman").removeClass("btn_active");
-
-            Labirinto.clickMod = 1;
-        }
-        else Labirinto.clickMod = 0;
     });
 
     function construirURLComParametros(url, parametros) {

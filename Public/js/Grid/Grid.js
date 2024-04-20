@@ -24,6 +24,7 @@ class Grid {
     }
 
     clickMod = 0;
+    selectedWeight = 0;
 
     #settings = {
         scale: 1,
@@ -171,6 +172,9 @@ class Grid {
                     "texture-portal-bottom",
                     "texture-portal-right",
                     "texture-portal-left",
+                    "texture-weight-0",
+                    "texture-weight-1",
+                    "texture-weight-2"
                 ].forEach(className => this.#grid[y][x].classList.remove(className));
 
                 let top = this.coordIsActive(x, y + 1);
@@ -188,6 +192,23 @@ class Grid {
                             this.#grid[y][x].classList.add("texture-portal-right");
                         else
                             this.#grid[y][x].classList.add("texture-portal-left");
+                    else if (this.coordIsWeight(x, y)) {
+                        let weight = this.#weight[this.coordOfWeight(x, y)][2];
+
+                        if (weight == 0)
+                            this.#grid[y][x].classList.add("texture-weight-0");
+                        else if (weight == 1)
+                            this.#grid[y][x].classList.add("texture-weight-1");
+                        else
+                            this.#grid[y][x].classList.add("texture-weight-2");
+
+                        let element = $(this.#grid[y][x]);
+                        if (!element.hasClass("texture-weight-rotate-0") &&
+                            !element.hasClass("texture-weight-rotate-1") &&
+                            !element.hasClass("texture-weight-rotate-2") &&
+                            !element.hasClass("texture-weight-rotate-3"))
+                            this.#grid[y][x].classList.add("texture-weight-rotate-" + (parseInt(Math.random() * 4) + 1));
+                    }
                     else
                         this.#grid[y][x].classList.add("texture-floor");
                 else {
@@ -239,6 +260,16 @@ class Grid {
         ) != -1;
     }
 
+    coordIsWeight(x, y) {
+        return this.coordOfWeight(x, y) != -1;
+    }
+
+    coordOfWeight(x, y) {
+        return this.#weight.findIndex(
+            (coord) => coord[0] == x && coord[1] == y
+        );
+    }
+
     set pacman(local) {
         let gridBlock = this.#grid[local[1]][local[0]];
 
@@ -272,6 +303,7 @@ class Grid {
 
     click(e, element, X, Y) {
         console.log(this.#portal);
+        console.log(this.#weight);
         console.log([X, Y]);
 
         if (this.clickMod === 0 || this.clickMod === 1) {
@@ -284,7 +316,6 @@ class Grid {
 
                 if (this.clickMod === 1)
                     this.#portal.push([X, Y]);
-
             } else {
                 this.#ambient.splice(this.#ambient.findIndex(
                     (coord) => coord[0] == X && coord[1] == Y
@@ -295,6 +326,7 @@ class Grid {
                         (coord) => coord[0] == X && coord[1] == Y
                     ), 1);
 
+
                 element.classList.remove("block-active");
             }
         } else if (this.clickMod === 2) {
@@ -303,6 +335,14 @@ class Grid {
         } else if (this.clickMod === 3) {
             if (this.coordIsActive(X, Y)) this.flag = [X, Y];
             else this.Screen.alert("Você não pode adicionar uma bandeira em uma parede", "danger");
+        } else if (this.clickMod === 4) {
+            if (element.classList.contains("block-active"))
+                if (this.coordIsWeight(X, Y))
+                    this.#weight.splice(this.#weight.findIndex(
+                        (coord) => coord[0] == X && coord[1] == Y
+                    ), 1);
+                else
+                    this.#weight.push([X, Y, this.selectedWeight]);
         }
 
         this.texture();
