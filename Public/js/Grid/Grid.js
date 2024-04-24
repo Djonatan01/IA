@@ -8,7 +8,23 @@ class Grid {
 
     #ambient = [];
     #portal = [];
-    #weight = [];
+    #weight = [
+        [
+            16,
+            14,
+            2
+        ],
+        [
+            19,
+            14,
+            2
+        ],
+        [
+            18,
+            14,
+            1
+        ]
+    ];
     #grid = {};
 
     #pacman = {
@@ -270,6 +286,10 @@ class Grid {
         );
     }
 
+    get Weight() {
+        return this.#weight;
+    }
+
     set pacman(local) {
         let gridBlock = this.#grid[local[1]][local[0]];
 
@@ -366,6 +386,10 @@ class Grid {
 
     get portalMap() {
         return this.#portal.map(coord => coord.map(x => x - 1).reverse().toString()).join("-");
+    }
+
+    get weightMap() {
+        return this.#weight.map(coord => [coord[1] - 1, coord[0] - 1, coord[2]].toString()).join("-");
     }
 
     playSound() {

@@ -1,8 +1,29 @@
+import numpy as np
+import random as rd
+import math
+
 def verificar_presenca(array, ponto):
     for coordenada in array:
         if coordenada == ponto:
             return True
     return False
+
+def weight(atual, weightMap):
+    for weight in weightMap:
+        if weight[0] == atual[0] and weight[1] == atual[1]:
+            return weight[2] + 1
+
+    return 0
+
+def posicoes_possiveis(mapa):
+    positions = []
+
+    for x in range(len(mapa)):
+        for y in range(len(mapa[0])):
+            if(mapa[x][y] > 0):
+                positions.append([x,y])
+
+    return positions
 
 # Rotina sucessores para Grade de Ocupação
 def sucessores(atual, mapa, portal_map):
@@ -67,7 +88,6 @@ def sucessores(atual, mapa, portal_map):
 
     return f
 
-
 def gerar_mapa(mapa):
     _mapa = []
 
@@ -75,3 +95,25 @@ def gerar_mapa(mapa):
         _mapa.append([int(i) for i in linha.split(',')])
 
     return _mapa
+
+def gera_H(ambient):
+    n = len(ambient)
+
+    h = np.zeros((n,n),int)
+
+    i = 0
+
+    for no_origem in ambient:
+        j = 0
+        ori_x, ori_y = no_origem
+        for no_destino in ambient:
+            if no_origem != no_destino:
+                des_x, des_y = no_destino
+                
+                v  = round(math.sqrt((int(ori_x) - int(des_x))**2 + (int(ori_y) - int(des_y))**2) * 2, 0)
+
+                h[i][j] = v*rd.uniform(0,1)
+            j += 1
+        i += 1
+    
+    return h
