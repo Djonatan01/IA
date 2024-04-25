@@ -12,8 +12,8 @@ $(document).ready(function () {
 
     Labirinto.createGrid();
 
-    Labirinto.pacman = [20, 6];
-    Labirinto.flag = [2, 6];
+    Labirinto.pacman = [15, 14];
+    Labirinto.flag = [20, 14];
 
     //<-----------------BUTÃOS----------------->
 
@@ -34,10 +34,10 @@ $(document).ready(function () {
     });
 
     active_button = (clicked) => {
-        if(clicked != 4) { $("#config_weight").removeClass("btn_active"); $("#floor").removeClass("active"); }
-        if(clicked != 3) $("#flag").removeClass("btn_active"); 
-        if(clicked != 2) $("#pacman").removeClass("btn_active"); 
-        if(clicked != 1) $("#portal").removeClass("btn_active"); 
+        if (clicked != 4) { $("#config_weight").removeClass("btn_active"); $("#floor").removeClass("active"); }
+        if (clicked != 3) $("#flag").removeClass("btn_active");
+        if (clicked != 2) $("#pacman").removeClass("btn_active");
+        if (clicked != 1) $("#portal").removeClass("btn_active");
     };
 
     $("#config_weight").click(function () {
@@ -132,14 +132,23 @@ $(document).ready(function () {
 
                         path = path.map(coord => ([coord[1] + 1, coord[0] + 1]));
 
-                        // console.log("Origem: ", Labirinto.pacman.coord);
-                        // console.log("Destino: ", Labirinto.flag.coord);
-                        // console.log("Caminho: ", path);
-                        // console.log("\n\n\n");
+                        var cost;
+                        if (
+                            methodText === "Custo Uniforme" || methodText === "Greedy" ||
+                            methodText === "A Estrela" ||
+                            methodText === "AIA Estrela"
+                        )
+                            cost = path.reduce((ac, coord) => {
+                                let index = Labirinto.coordOfWeight(...coord);
+
+                                if (index > -1) return ac + Labirinto.Weight[index][2] + 1;
+                                else return ac + 1;
+                            }, 0)
+                        else cost = path.length;
 
                         $('#startOrigin').text("[" + Labirinto.pacman.coord + "]");
                         $('#endOrigin').text("[" + Labirinto.flag.coord + "]");
-                        $('#cost').text(path.length);
+                        $('#cost').text(cost);
                         $('#limit').text(limite ?? 0);
 
                         var array = path
@@ -175,6 +184,10 @@ $(document).ready(function () {
                 case "Profundidade Limitada": route = "profLimitada"; parametros = { ...parametros, limite: $("#ipt_profLim").val() }; break;
                 case "Aprofundamento Iterativo": route = "aprofInterativo"; break;
                 case "Bidirecional": route = "bidirecional"; break;
+                case "Custo Uniforme": route = "custoUniforme"; parametros = { ...parametros, weightMap: Labirinto.weightMap }; break;
+                case "Greedy": route = "greedy"; parametros = { ...parametros, weightMap: Labirinto.weightMap }; break;
+                case "A Estrela": route = "aestrela"; parametros = { ...parametros, weightMap: Labirinto.weightMap }; break;
+                case "AIA Estrela": route = "aiaestrela"; parametros = { ...parametros, weightMap: Labirinto.weightMap }; break;
             }
 
             // if (radio == "profundidadelimit") radio = "/profundidade/" + limited_depth;

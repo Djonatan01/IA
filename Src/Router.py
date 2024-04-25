@@ -4,7 +4,11 @@ from Src.Resources.Profundidade import Profundidade
 from Src.Resources.ProfLimitada import ProfLimitada
 from Src.Resources.AprofInterativo import AprofInterativo
 from Src.Resources.Bidirecional import Bidirecional
-from Src.Util.functions import gerar_mapa
+from Src.Resources.CustoUniforme import CustoUniforme
+from Src.Resources.Greedy import Greedy
+from Src.Resources.Aestrela import Aestrela
+from Src.Resources.AIAestrela import AIAestrela
+from Src.Util.functions import gerar_mapa, posicoes_possiveis, gera_H
 
 
 Router = Blueprint('router', __name__)
@@ -75,3 +79,53 @@ def bidirecional():
     search = Bidirecional(inicio, fim, mapa, portalMap)
 
     return search.make()
+
+@Router.route("/custoUniforme")
+def custoUniforme():
+    mapa = gerar_mapa(request.args.get('mapa'))
+    inicio = [int(i) for i in request.args.get('inicio').split(',')][::-1]
+    fim = [int(i) for i in request.args.get('fim').split(',')][::-1]
+    portalMap = gerar_mapa(request.args.get('portalMap'))
+    weightMap = gerar_mapa(request.args.get('weightMap'))
+
+    search = CustoUniforme(inicio, fim, mapa, portalMap, weightMap)
+
+    return search.make(inicio, fim) 
+
+@Router.route("/greedy")
+def greedy():
+    mapa = gerar_mapa(request.args.get('mapa'))
+    inicio = [int(i) for i in request.args.get('inicio').split(',')][::-1]
+    fim = [int(i) for i in request.args.get('fim').split(',')][::-1]
+    portalMap = gerar_mapa(request.args.get('portalMap'))
+    weightMap = gerar_mapa(request.args.get('weightMap'))
+
+    search = Greedy(inicio, fim, mapa, portalMap, weightMap, posicoes_possiveis(mapa))
+
+    return search.make(inicio, fim, gera_H(posicoes_possiveis(mapa))) 
+
+
+@Router.route("/aestrela")
+def aestrela():
+    mapa = gerar_mapa(request.args.get('mapa'))
+    inicio = [int(i) for i in request.args.get('inicio').split(',')][::-1]
+    fim = [int(i) for i in request.args.get('fim').split(',')][::-1]
+    portalMap = gerar_mapa(request.args.get('portalMap'))
+    weightMap = gerar_mapa(request.args.get('weightMap'))
+
+    search = Aestrela(inicio, fim, mapa, portalMap, weightMap, posicoes_possiveis(mapa))
+
+    return search.make(inicio, fim, gera_H(posicoes_possiveis(mapa))) 
+
+
+@Router.route("/aiaestrela")
+def aiaestrela():
+    mapa = gerar_mapa(request.args.get('mapa'))
+    inicio = [int(i) for i in request.args.get('inicio').split(',')][::-1]
+    fim = [int(i) for i in request.args.get('fim').split(',')][::-1]
+    portalMap = gerar_mapa(request.args.get('portalMap'))
+    weightMap = gerar_mapa(request.args.get('weightMap'))
+
+    search = AIAestrela(inicio, fim, mapa, portalMap, weightMap, posicoes_possiveis(mapa))
+
+    return search.make(inicio, fim, gera_H(posicoes_possiveis(mapa))) 
