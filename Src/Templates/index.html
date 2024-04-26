@@ -1,156 +1,154 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pacman</title>
-    <link rel="icon" type="image/x-icon" href="../../Public/img/pacman.png">
-    <link rel="stylesheet" href="../../Public/css/style.css">
-    <link rel="stylesheet" href="../../Public/css/grid.css">
-</head>
+    <link rel="icon" type="image/x-icon" href="../../Public/img/pacman.png" />
+    <link rel="stylesheet" href="../../Public/css/style.css" />
+    <link rel="stylesheet" href="../../Public/css/grid.css" />
+  </head>
 
-<body>
+  <body>
     <div id="base"></div>
     <div class="method_selected">
-        <div class="results">
-            <span id="typeMethod"></span>
+      <div class="results">
+        <span id="typeMethod"></span>
+      </div>
+      <div class="results">
+        <i class="ph-fill ph-ghost"></i>
+        <span id="startOrigin"></span>
+      </div>
+      <div class="results">
+        <i class="ph ph-target"></i>
+        <span id="endOrigin"></span>
+      </div>
+      <div class="results">
+        <i class="ph ph-coins"></i>
+        <span id="cost"></span>
+      </div>
+      <div class="results">
+        <i class="ph ph-prohibit"></i>
+        <span id="limit"></span>
+      </div>
+      <div class="results sectionPath">
+        <div class="txt">
+          <i class="ph-fill ph-path"></i>
+          <span id="pathMethod"></span>
         </div>
-        <div class="results">
-            <i class="ph-fill ph-ghost"></i>
-            <span id="startOrigin"></span>
-        </div>
-        <div class="results">
-            <i class="ph ph-target"></i>
-            <span id="endOrigin"></span>
-        </div>
-        <div class="results">
-            <i class="ph ph-coins"></i>
-            <span id="cost"></span>
-        </div>
-        <div class="results">
-            <i class="ph ph-prohibit"></i>
-            <span id="limit"></span>
-        </div>
-        <div class="results">
-            <i class="ph ph-barbell"></i>
-            <span id="weight"></span>
-        </div>
-        <div class="results sectionPath">
-            <div class="txt">
-                <i class="ph-fill ph-path"></i>
-                <span id="pathMethod"></span>
-            </div>
-            <span id="path">
-                <ul>
-                </ul>
-            </span>
-        </div>
+        <span id="path">
+          <ul></ul>
+        </span>
+      </div>
     </div>
     <div class="action">
-        <button class="portal" id="portal">
-            <i class="ph-fill ph-door-open icon"></i>
-        </button>
+      <button class="portal" id="portal">
+        <i class="ph-fill ph-door-open icon"></i>
+      </button>
 
-        <button class="config" id="config_weight">
-            <i class="ph ph-cube icon"></i>
+      <button class="config" id="config_weight">
+        <i class="ph ph-cube icon"></i>
+      </button>
+      <div class="floor" id="floor">
+        <button
+          class="floor_option"
+          id="floor1"
+          style="box-shadow: 0px 5px 0px -1px var(--secondary)"
+        >
+          <img src="../../Public/img/bg-1_1.png" />
         </button>
-        <div class="floor" id="floor">
-            <button class="floor_option" id="floor1" style="box-shadow: 0px 5px 0px -1px var(--secondary);">
-                <img src="../../Public/img/bg-1_1.png">
-            </button>
-            <button class="floor_option" id="floor2">
-                <img src="../../Public/img/bg-1_2.png">
-            </button>
-            <button class="floor_option" id="floor3">
-                <img src="../../Public/img/bg-1_3.png   ">
-            </button>
+        <button class="floor_option" id="floor2">
+          <img src="../../Public/img/bg-1_2.png" />
+        </button>
+        <button class="floor_option" id="floor3">
+          <img src="../../Public/img/bg-1_3.png   " />
+        </button>
+      </div>
+
+      <div class="options" id="option">
+        <button class="method_option" id="Ampli">
+          <span>Amplitude</span>
+        </button>
+        <button class="method_option" id="Prof">
+          <span>Profundidade</span>
+        </button>
+        <div class="profLimit">
+          <button class="method_option" id="ProfLim">
+            <span>Profundidade Limitada</span>
+          </button>
+          <input type="number" name="profundLimite" id="ipt_profLim" min="0" />
         </div>
-        
-        <div class="options" id="option">
-            <button class="method_option" id="Ampli">
-                <span>Amplitude</span>
-            </button>
-            <button class="method_option" id="Prof">
-                <span>Profundidade</span>
-            </button>
-            <div class="profLimit">
-                <button class="method_option" id="ProfLim">
-                    <span>Profundidade Limitada</span>
-                </button>
-                <input type="number" name="profundLimite" id="ipt_profLim" min="0">
-            </div>
-            <button class="method_option" id="AprofIter">
-                <span>Aprofundamento Iterativo</span>
-            </button>
-            <button class="method_option" id="AprofIter">
-                <span>Bidirecional</span>
-            </button>
-
-            <button class="method_option" id="Greedy">
-                <span>Custo Uniforme</span>
-            </button>
-
-            <button class="method_option" id="Greedy">
-                <span>Greedy</span>
-            </button>
-            <button class="method_option" id="Aestrela">
-                <span>A Estrela</span>
-            </button>
-            <button class="method_option" id="AIAestrela">
-                <span>AIA Estrela</span>
-            </button>
-        </div>
-        <button class="config" id="config">
-            <i class="ph-fill ph-gear-six icon"></i>
+        <button class="method_option" id="AprofIter">
+          <span>Aprofundamento Iterativo</span>
         </button>
+        <button class="method_option" id="AprofIter">
+          <span>Bidirecional</span>
+        </button>
+
+        <button class="method_option" id="Greedy">
+          <span>Custo Uniforme</span>
+        </button>
+
+        <button class="method_option" id="Greedy">
+          <span>Greedy</span>
+        </button>
+        <button class="method_option" id="Aestrela">
+          <span>A Estrela</span>
+        </button>
+        <button class="method_option" id="AIAestrela">
+          <span>AIA Estrela</span>
+        </button>
+      </div>
+      <button class="config" id="config">
+        <i class="ph-fill ph-gear-six icon"></i>
+      </button>
     </div>
     <div class="btns">
-        <button class="btn" id="pacman">
-            <img src="../../Public/img/pacman.png">
-        </button>
-        <button class="start" id="start">
-            <div class="contentStart">
-                <span>Iniciar</span>
-                <i class="ph-fill ph-ghost icon"></i>
-            </div>
-            <div id="container">
-                <div class="dots">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
-                <div class="dots2">
-                    <div class="dot2"></div>
-                    <div class="dot2"></div>
-                    <div class="dot2"></div>
-                    <div class="dot2"></div>
-                    <div class="dot2"></div>
-                    <div class="dot2"></div>
-                    <div class="dot2"></div>
-                    <div class="dot2"></div>
-                    <div class="dot2"></div>
-                    <div class="dot2"></div>
-                </div>
-                <div class="circle"></div>
-            </div>
-        </button>
-        <button class="btn" id="flag">
-            <i class="ph-fill ph-flag-checkered icon"></i>
-        </button>
+      <button class="btn" id="pacman">
+        <img src="../../Public/img/pacman.png" />
+      </button>
+      <button class="start" id="start">
+        <div class="contentStart">
+          <span>Iniciar</span>
+          <i class="ph-fill ph-ghost icon"></i>
+        </div>
+        <div id="container">
+          <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <div class="dots2">
+            <div class="dot2"></div>
+            <div class="dot2"></div>
+            <div class="dot2"></div>
+            <div class="dot2"></div>
+            <div class="dot2"></div>
+            <div class="dot2"></div>
+            <div class="dot2"></div>
+            <div class="dot2"></div>
+            <div class="dot2"></div>
+            <div class="dot2"></div>
+          </div>
+          <div class="circle"></div>
+        </div>
+      </button>
+      <button class="btn" id="flag">
+        <i class="ph-fill ph-flag-checkered icon"></i>
+      </button>
     </div>
-</body>
-<script src="../../Public/js/jquery-3.7.1.min.js"></script>
-<script src="https://unpkg.com/@phosphor-icons/web"></script>
-<script src="../../Public/js/Screen/ScreenManager.js"></script>
-<script src="../../Public/js/Grid/Grid.js"></script>
-<script src="../../Public/js/app.js"></script>
-
+  </body>
+  <script src="../../Public/js/jquery-3.7.1.min.js"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="../../Public/js/Screen/ScreenManager.js"></script>
+  <script src="../../Public/js/Grid/Grid.js"></script>
+  <script src="../../Public/js/app.js"></script>
 </html>
+

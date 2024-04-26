@@ -103,10 +103,10 @@ python3 main.py
 
 [EN] Project usage:
 
-- You must select the pacman icon to position it on the map. (START)
-- You must select the flag to position it on the map. (DESTINATION)
+- You have to select the pacman icon to position it on the map. (START)
+- You have to select the flag to position it on the map. (DESTINATION)
 - The gear icon contains all the algorithms that can be selected.
-- For the Uniform Cost, Greedy, A Estrela and AIA Estrela algorithms, position the weights.
-- The Ice Cube icon (box) contains the weights that can be selected and positioned on the map. Note: to deselect the weight, the weight icon must be selected.
+- For the Uniform Cost, Greedy, A-Star and A-Star in AI algorithms, position the weights.
+- The Ice Cube icon (box) contains the weights that can be selected and positioned on the map. Note: to deselect the weight, the weight icon have to be selected.
 - The map is interactive, so the paths can also be changed just by clicking on the block to transform it into a wall or path.
 - To start, just click START.
